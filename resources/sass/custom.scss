@@ -1,0 +1,27 @@
+#parallax
+{
+  width: 100%;
+  overflow: hidden;
+  background: url(/image/background.jpg);
+  background-attachment: fixed;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+#top
+{
+  width: 100%;
+  overflow: hidden;
+  background: url(/image/bg/top.jpg);
+  background-attachment: fixed;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.mixBlnd
+{
+	background-blend-mode: screen;
+}

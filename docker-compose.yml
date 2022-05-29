@@ -1,0 +1,38 @@
+version: "3.6"
+services:
+    nginx:
+        restart: always
+        container_name: nginx
+        build:
+            context: .
+            dockerfile: docker/nginx.Dockerfile
+        ports:
+            - 443:443
+        links:
+            - fpm
+        volumes:
+          - ./:/var/www/realedition
+    fpm:
+        restart: always
+        container_name: fpm
+        build:
+            context:  .
+            dockerfile: docker/fpm.Dockerfile
+        volumes:
+            - ./:/var/www/realedition
+    mssql:
+        restart: always
+        container_name: mssql
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        environment:
+            - ACCEPT_EULA=Y
+            - SA_PASSWORD=SUPERSECRET
+            - MSSQL_PID=Enterprise
+            - MSSQL_AGENT_ENABLED=True
+            - TZ=Europe/Moscow
+            - MSSQL_COLLATION=Cyrillic_General_CI_AS
+            - MSSQL_LCID=1049
+        ports:
+            - 1433:1433
+        volumes:
+            - ./data:/var/opt/mssql/data
