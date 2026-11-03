@@ -26,13 +26,13 @@ services:
         image: mcr.microsoft.com/mssql/server:2019-latest
         environment:
             - ACCEPT_EULA=Y
-            - SA_PASSWORD=SUPERSECRET
+            - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD:?Set MSSQL_SA_PASSWORD in the environment}
             - MSSQL_PID=Enterprise
             - MSSQL_AGENT_ENABLED=True
             - TZ=Europe/Moscow
             - MSSQL_COLLATION=Cyrillic_General_CI_AS
             - MSSQL_LCID=1049
         ports:
-            - 1433:1433
+            - 127.0.0.1:1433:1433
         volumes:
             - ./data:/var/opt/mssql/data
